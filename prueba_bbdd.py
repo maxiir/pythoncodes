@@ -1,0 +1,25 @@
+#LOS PRIMARY KEY SON CAMPOS QUE NO SE PUEDEN REPETIR COMO UN DNI
+
+
+import sqlite3
+
+conexion=sqlite3.connect("BBDD_PRODUCTOS")
+
+cursor=conexion.cursor()
+
+#cursor.execute("CREATE TABLE PRODUCTOS (CODIGO VARCHAR (4) PRIMARY KEY,NOMBRE VARCHAR(50)UNIQUE ,STOCK INTEGER(50),VALOR INTEGER(50))") #LAS COLUMNAS QUE VA A TENER# UNIQUE EVITA LAS REPETICIONES EN LOS CAMPOS
+
+#PARA AGREGAR UN PRIMARY KEY AUTOMATICO SE DEBE COLOCAR, ID INTEGER PRIMARY KEY AUTO INCREMENT, COLOCAR NULL Y QUITAR UN SIGNO DE PREGUNTA 
+
+productos=[("18DF","harina",800,80),("87HJ","leche",1000,100),("98HJ","agua",500,110),("98JH","cafe",700,40)]
+
+cursor.executemany("INSERT INTO PRODUCTOS VALUES(?,?,?,?)",productos)  
+
+#cursor.execute("UPDATE PRODUCTOS SET VALOR=100 WHERE NOMBRE="harina") #ACTUALIZAR UN PRECIO ESPECIFICO
+#para eliminar un registro es lo mismo solo que con DELETE FROM PRODUCTOS ,NUNCA OLVIDAR EL "WHERE" EN DELETE
+
+#for Row in cursor: ver en consola array de tabla
+ #   print(Row)
+
+conexion.commit()
+conexion.close()
